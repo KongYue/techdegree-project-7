@@ -20,33 +20,15 @@
       <h1><strong>Your</strong>App™</h1>
       <div class="bell-notifications">
         <svg
-          class="bell"
-          version="1.1"
-          id="Layer_1"
           xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px"
-          y="0px"
           viewBox="0 0 32 32"
-          style="enable-background:new 0 0 32 32;"
-          xml:space="preserve"
+          class="bell"
         >
-          <style type="text/css">
-            .st0 {
-              fill: #ffffff;
-            }
-          </style>
-          <g id="_x36__6_">
-            <g>
-              <path
-                class="st0"
-                d="M24,18v-8c0-5.5-4.5-10-10-10S4,4.5,4,10v8l-4,8h9.1c0.5,2.3,2.5,4,4.9,4s4.4-1.7,4.9-4H28L24,18z M14,28
-        			c-1.3,0-2.4-0.8-2.8-2h5.6C16.4,27.2,15.3,28,14,28z M3,24l3-6v-8c0-4.4,3.6-8,8-8s8,3.6,8,8v8l3,6H3z"
-              />
-            </g>
-          </g>
+          <path
+            d="M24 18v-8c0-5.5-4.5-10-10-10S4 4.5 4 10v8l-4 8h9.1c.5 2.3 2.5 4 4.9 4s4.4-1.7 4.9-4H28l-4-8zM14 28c-1.3 0-2.4-.8-2.8-2h5.6c-.4 1.2-1.5 2-2.8 2zM3 24l3-6v-8c0-4.4 3.6-8 8-8s8 3.6 8 8v8l3 6H3z"
+            fill="#fff"
+          />
         </svg>
-
         <div class="notifications"><span class="dot"></span></div>
       </div>
       <img src="images/member-2.jpg" alt="" />
@@ -91,7 +73,9 @@
       </section>
       <section class="mobileusers">
         <h3>Mobile Users</h3>
-        <canvas id="mobileusers-chart"></canvas>
+        <div class="widget-container-half">
+          <canvas id="mobileusers-chart"></canvas>
+        </div>
       </section>
       <!-- Social status is in below -->
       <div class="social-container">
@@ -298,7 +282,7 @@
         <h3>Setting</h3>
         <label class="switch-for-en switch">
           <label for="send-email-switch">Send Email Notifications</label
-          ><input type="checkbox" checked id="set-profile-switch" />
+          ><input type="checkbox" checked id="send-email-switch" />
           <span class="slider round"></span>
         </label>
         <label class="switch-for-sp switch">
@@ -330,5 +314,7 @@
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0-rc.1/Chart.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="js/autocomplete.js"></script>
+    <script src="js/savesetting.js"></script>
   </body>
 </html>

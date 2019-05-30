@@ -1,35 +1,41 @@
-const alert = document.getElementById("alert");
-alert.innerHTML =
-  '<div class="alert-banner"><p><strong>Alert:</strong> You have <strong>6</strong> overdue tasks to complete</p><p class="alert-banner-close">x</p></div>';
-alert.addEventListener("click", e => {
-  const element = e.target;
-  if (element.classList.contains("alert-banner-close")) {
-    alert.style.display = "none";
+const notificationsArray = [
+  "This is first notification",
+  "This is second notification"
+];
+const bell = document.getElementsByClassName("bell-notifications")[0];
+const noticiationsContainer = document.getElementsByClassName(
+  "notifications"
+)[0];
+
+bell.addEventListener("click", e => {
+  if (noticiationsContainer.childElementCount === 1) {
+    noticiationsContainer.appendChild(createNotifications(notificationsArray));
+  } else {
+    noticiationsContainer.removeChild(noticiationsContainer.lastChild);
   }
 });
 
-let trafficData = {
-  labels: [
-    "16-22",
-    "23-29",
-    "30-5",
-    "6-12",
-    "13-19",
-    "20-26",
-    "27-3",
-    "4-10",
-    "11-17",
-    "18-24",
-    "25-31"
-  ],
-  datasets: [
-    {
-      data: [750, 1250, 1000, 2000, 1500, 1750, 1250, 1850, 2250, 1500, 2500],
-      backgroundColor: "rgba(116, 119, 191, .3)",
-      borderWidth: 1
-    }
-  ]
-};
+function createNotifications(arr) {
+  let notifications = document.createElement("div");
+  notifications.setAttribute("class", "newNotifications");
+  for (let i = 0; i < arr.length; i++) {
+    let notification = document.createElement("span");
+    notification.textContent = arr[i];
+    notification.setAttribute("class", "notification");
+    notifications.appendChild(notification);
+  }
+  return notifications;
+}
+
+const alert_container = document.getElementById("alert");
+alert_container.innerHTML =
+  '<div class="alert-banner"><p><strong>Alert:</strong> You have <strong>6</strong> overdue tasks to complete</p><p class="alert-banner-close">x</p></div>';
+alert_container.addEventListener("click", e => {
+  const element = e.target;
+  if (element.classList.contains("alert-banner-close")) {
+    alert_container.style.display = "none";
+  }
+});
 
 let trafficOptions = {
   aspectRatio: 2.5,
@@ -38,6 +44,14 @@ let trafficOptions = {
   },
   scales: {
     yAxes: [
+      {
+        ticks: {
+          beginAtZero: true,
+          min: 0
+        }
+      }
+    ],
+    xAxes: [
       {
         ticks: {
           beginAtZero: true
@@ -51,16 +65,133 @@ let trafficOptions = {
 };
 
 var ctx = document.getElementById("traffic-chart");
-var myChart = new Chart(ctx, {
-  // The type of chart we want to create
-  type: "line",
+var trafficNav = document.getElementsByClassName("traffic-nav")[0];
+showTrafficByDuration("Monthly");
 
-  // The data for our dataset
-  data: trafficData,
+trafficNav.addEventListener("click", e => {
+  let targetNode = e.target;
+  if (targetNode.className === "traffic-nav-link") {
+    let allChilds = trafficNav.childNodes;
+    for (let i = 0; i < allChilds.length; i++) {
+      if (allChilds[i].className === "selectedduration") {
+        allChilds[i].className = "traffic-nav-link";
+      }
+    }
 
-  // Configuration options go here
-  options: trafficOptions
+    targetNode.className = "selectedduration";
+    let duration = targetNode.textContent;
+    showTrafficByDuration(duration);
+  } else if (targetNode.className === "selectedduration") {
+    targetNode.className = "traffic-nav-link";
+  }
 });
+
+function showTrafficByDuration(duration) {
+  var trafficData = "";
+  if (duration === "Monthly") {
+    trafficData = {
+      labels: [
+        "16-22",
+        "23-29",
+        "30-5",
+        "6-12",
+        "13-19",
+        "20-26",
+        "27-3",
+        "4-10",
+        "11-17",
+        "18-24",
+        "25-31"
+      ],
+      datasets: [
+        {
+          data: [
+            750,
+            1250,
+            1000,
+            2000,
+            1500,
+            1750,
+            1250,
+            1850,
+            2250,
+            1500,
+            2500
+          ],
+          backgroundColor: "rgba(116, 119, 191, .3)",
+          pointBackgroundColor: "rgba(255, 255, 255, 1)",
+          pointBorderColor: "rgba(116, 119, 191, .8)",
+          pointBorderWidth: 2,
+          pointRadius: 6,
+          pointHoverRadius: 8,
+          lineTension: 0,
+          borderWidth: 1
+        }
+      ]
+    };
+  } else if (duration === "Weekly") {
+    trafficData = {
+      labels: ["1st Week", "2nd Week", "3rd Week", "4th Week"],
+      datasets: [
+        {
+          data: [50, 20, 70, 80],
+          backgroundColor: "rgba(116, 119, 191, .3)",
+          pointBackgroundColor: "rgba(255, 255, 255, 1)",
+          pointBorderColor: "rgba(116, 119, 191, .8)",
+          pointBorderWidth: 2,
+          pointRadius: 6,
+          pointHoverRadius: 8,
+          lineTension: 0,
+          borderWidth: 1
+        }
+      ]
+    };
+  } else if (duration === "Daily") {
+    trafficData = {
+      labels: ["S", "M", "T", "W", "T", "F", "S"],
+      datasets: [
+        {
+          data: [100, 200, 300, 400, 500, 600, 700],
+          backgroundColor: "rgba(116, 119, 191, .3)",
+          pointBackgroundColor: "rgba(255, 255, 255, 1)",
+          pointBorderColor: "rgba(116, 119, 191, .8)",
+          pointBorderWidth: 2,
+          pointRadius: 6,
+          pointHoverRadius: 8,
+          lineTension: 0,
+          borderWidth: 1
+        }
+      ]
+    };
+  } else if (duration === "Hourly") {
+    trafficData = {
+      labels: ["0-6 hour", "6-12 hour", "12-18 hour", "18-24 hour"],
+      datasets: [
+        {
+          data: [750, 1250, 1000, 2000],
+          backgroundColor: "rgba(116, 119, 191, .3)",
+          pointBackgroundColor: "rgba(255, 255, 255, 1)",
+          pointBorderColor: "rgba(116, 119, 191, .8)",
+          pointBorderWidth: 2,
+          pointRadius: 6,
+          pointHoverRadius: 8,
+          lineTension: 0,
+          borderWidth: 1
+        }
+      ]
+    };
+  }
+  var myChart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: "line",
+
+    // The data for our dataset
+    data: trafficData,
+
+    // Configuration options go here
+    options: trafficOptions
+  });
+}
 
 const dailyCanvas = document.getElementById("daily-chart");
 
