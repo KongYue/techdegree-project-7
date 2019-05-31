@@ -278,16 +278,26 @@
       <!-- Setting Section is in below -->
       <section class="setting">
         <h3>Setting</h3>
-        <label class="switch-for-en switch">
-          <label for="send-email-switch">Send Email Notifications</label
-          ><input type="checkbox" checked id="send-email-switch" />
-          <span class="slider round"></span>
-        </label>
-        <label class="switch-for-sp switch">
-          <label for="set-profile-switch">Set Profile to Public</label
-          ><input type="checkbox" checked id="set-profile-switch" />
-          <span class="slider round"></span>
-        </label>
+
+        <div class="switch-for-en switch">
+          <label for="send-email-switch"
+            >Send Email Notifications<input
+              type="checkbox"
+              checked
+              id="send-email-switch"
+            />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="switch-for-sp switch">
+          <label for="set-profile-switch"
+            >Set Profile to Public<input
+              type="checkbox"
+              checked
+              id="set-profile-switch"/>
+            <span class="slider round"></span
+          ></label>
+        </div>
 
         <!-- Custom Css toggle code -->
         <!-- Custom Css toggle code -->
@@ -311,8 +321,12 @@
       </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0-rc.1/Chart.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="js/messageuser.js"></script>
     <script src="js/autocomplete.js"></script>
     <script src="js/savesetting.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/alertmessage.js"></script>
+    <script src="js/traffic.js"></script>
+    <script src="js/daily_and_mobileusers.js"></script>
   </body>
 </html>

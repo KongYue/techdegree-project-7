@@ -1,42 +1,3 @@
-const notificationsArray = [
-  "This is first notification",
-  "This is second notification"
-];
-const bell = document.getElementsByClassName("bell-notifications")[0];
-const noticiationsContainer = document.getElementsByClassName(
-  "notifications"
-)[0];
-
-bell.addEventListener("click", e => {
-  if (noticiationsContainer.childElementCount === 1) {
-    noticiationsContainer.appendChild(createNotifications(notificationsArray));
-  } else {
-    noticiationsContainer.removeChild(noticiationsContainer.lastChild);
-  }
-});
-
-function createNotifications(arr) {
-  let notifications = document.createElement("div");
-  notifications.setAttribute("class", "newNotifications");
-  for (let i = 0; i < arr.length; i++) {
-    let notification = document.createElement("span");
-    notification.textContent = arr[i];
-    notification.setAttribute("class", "notification");
-    notifications.appendChild(notification);
-  }
-  return notifications;
-}
-
-const alert_container = document.getElementById("alert");
-alert_container.innerHTML =
-  '<div class="alert-banner"><p><strong>Alert:</strong> You have <strong>6</strong> overdue tasks to complete</p><p class="alert-banner-close">x</p></div>';
-alert_container.addEventListener("click", e => {
-  const element = e.target;
-  if (element.classList.contains("alert-banner-close")) {
-    alert_container.style.display = "none";
-  }
-});
-
 let trafficOptions = {
   aspectRatio: 2.5,
   animation: {
@@ -67,6 +28,10 @@ let trafficOptions = {
 var ctx = document.getElementById("traffic-chart");
 var trafficNav = document.getElementsByClassName("traffic-nav")[0];
 showTrafficByDuration("Monthly");
+var monthlyChild = trafficNav.lastElementChild;
+monthlyChild.className = "selectedduration";
+
+// **check user to click different duration frame
 
 trafficNav.addEventListener("click", e => {
   let targetNode = e.target;
@@ -192,92 +157,3 @@ function showTrafficByDuration(duration) {
     options: trafficOptions
   });
 }
-
-const dailyCanvas = document.getElementById("daily-chart");
-
-// data for daily traffic bar chart
-const dailyData = {
-  labels: ["S", "M", "T", "W", "T", "F", "S"],
-  datasets: [
-    {
-      label: "# of Hits",
-      data: [75, 115, 175, 125, 225, 200, 100],
-      backgroundColor: "#7477BF",
-      borderWidth: 1
-    }
-  ]
-};
-const dailyOptions = {
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true
-        }
-      }
-    ]
-  },
-  legend: {
-    display: false
-  }
-};
-
-let dailyChart = new Chart(dailyCanvas, {
-  type: "bar",
-  data: dailyData,
-  options: dailyOptions
-});
-
-const mobileCanvas = document.getElementById("mobileusers-chart");
-const mobileData = {
-  labels: ["Desktop", "Tablet", "Phones"],
-  datasets: [
-    {
-      label: "# of Users",
-      data: [2000, 550, 500],
-      borderWidth: 0,
-      backgroundColor: ["#7477BF", "#78CF82", "#51B6C8"]
-    }
-  ]
-};
-
-const mobileOptions = {
-  legend: {
-    position: "right",
-    labels: {
-      boxWidth: 20,
-      fontStyle: "bold"
-    }
-  },
-  layout: {
-    padding: {
-      left: 50,
-      right: 0,
-      top: 0,
-      bottom: 0
-    }
-  }
-};
-
-let mobileChart = new Chart(mobileCanvas, {
-  type: "doughnut",
-  data: mobileData,
-  options: mobileOptions
-});
-
-const user = document.getElementById("userField");
-const message = document.getElementById("messageField");
-const send = document.getElementById("send");
-
-send.addEventListener("click", () => {
-  // ensure user and message fields are filled out
-  if (user.value === "" && message.value === "") {
-    alert("Please fill out user and message fields before sending");
-  } else if (user.value === "") {
-    alert("Please fill out user field before sending");
-  } else if (message.value === "") {
-    alert("Please fill out message field before sending");
-  } else {
-    alert(`Message successfully sent to: ${user.value}`);
-  }
-});
