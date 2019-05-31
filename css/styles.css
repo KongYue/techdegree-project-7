@@ -6,9 +6,18 @@
   font-family: "Open sans", Verdana, Geneva, Tahoma, sans-serif;
 }
 
+h2 {
+  font-size: 20px;
+}
+h3 {
+  font-size: 17px;
+}
+p,
+a {
+  font-size: 14px;
+}
 .grid-container {
   width: 98%;
-  min-width: 629px;
   margin: 5px auto;
   display: grid;
   grid-template-columns: 100%;
@@ -123,14 +132,17 @@ color: #4C4B73;  left ban
 .nav {
   grid-area: nav;
   display: flex;
-  justify-content: space-around;
-  position: relative;
+  justify-content: space-between;
   background-color: #4c4b73;
 }
+.nav a {
+  display: inline-block;
+  width: calc(100% / 4 - 10px);
+}
 .nav img {
-  position: absolute;
+  display: block;
   height: 50%;
-  top: 21%;
+  margin: 20px auto;
 }
 /* Main style */
 .main {
@@ -197,11 +209,6 @@ color: #4C4B73;  left ban
   padding: 5px;
   border-radius: 5px;
 }
-/* .widget-container-full,
-.widget-container-half,
-.mobileusers {
-  overflow: auto;
-} */
 
 /* Social Part style */
 
@@ -212,7 +219,7 @@ color: #4C4B73;  left ban
 .social-twitter,
 .social-facebook,
 .social-googleplus {
-  width: 25%;
+  width: calc(100% / 3 - 10px);
   background-color: #fbfbfb;
   border: solid #e1e1e1 1px;
   display: flex;
@@ -333,7 +340,6 @@ color: #4C4B73;  left ban
   position: absolute;
   cursor: pointer;
   top: 0;
-
   right: 0;
   bottom: 0;
   background-color: #ccc;
@@ -496,7 +502,6 @@ input:checked + .slider:before {
   .widget-container-half {
     width: 95%;
     overflow: hidden;
-    padding: auto;
   }
   .social-container {
     grid-area: social-container;
